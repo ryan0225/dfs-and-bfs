@@ -2,6 +2,7 @@
 The difference between dfs and bfs.
 ![圖表](https://github.com/ryan0225/dfs-and-bfs/blob/main/different.png)
 
+以下是我實做出來的dfs跟bfs程式碼，主要作用是遍歷一個無權無向圖!
 dfs
 ```cpp
 #include <iostream>
