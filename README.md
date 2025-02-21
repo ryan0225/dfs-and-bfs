@@ -1,4 +1,4 @@
-# dfs-and-bfs
+# dfs-and-bfs 還有 dp
 它們的區別~
 ![圖表](https://github.com/ryan0225/dfs-and-bfs/blob/main/different.png)
 
@@ -67,5 +67,50 @@ int main () {
 	graph[3] = {1,2};
 	graph[4] = {0,2};
 	bfs(0,graph,eee);
+}
+```
+
+dp
+用來解AIME 2 problem 8
+```
+#include <iostream>
+#include <vector>
+#include <climits>
+#include <algorithm>
+using namespace std;
+
+int main () {
+	int n = 1000;  //1~n的錢
+	vector<int> d(1,0);  //d用來存greedy的結果
+	vector<int> coins = {1,10,25};  //幣值
+	vector<int> rev_coins(coins.size());  //用來算greedy
+	vector<int> dp(n+1,INT_MAX);  //DP算結果(全局最佳解)
+	dp[0] = 0;
+	//DP
+	for (int i=1;i<=n;i++) {
+		for (auto& j : coins) {
+			if (i >= j) {
+				dp[i] = min(dp[i],dp[i-j]+1);
+			}
+		}
+	}
+	
+	//greedy
+	reverse_copy(coins.begin(),coins.end(),rev_coins.begin());
+	for (int i=1;i<=n;i++) {
+		int sum = 0;
+		int coin;
+		int flag = i;
+		for (auto& j : rev_coins) {
+			coin = flag / j;
+  			sum += coin;
+  			flag = flag % j;
+  	    }
+  	d.push_back(sum);
+	}
+	
+	int wrong = 0;
+	for (int i=1;i<=n;i++) if (d[i] != dp[i]) wrong++;
+	cout << "wrong " << wrong;
 }
 ```
