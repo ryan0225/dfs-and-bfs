@@ -72,7 +72,7 @@ int main () {
 
 dp
 用來解AIME 2 problem 8
-```
+```cpp
 #include <iostream>
 #include <vector>
 #include <climits>
