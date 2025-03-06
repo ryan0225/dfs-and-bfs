@@ -5,7 +5,7 @@
 以下是我實做出來的dfs跟bfs程式碼，主要作用是遍歷一個無權無向圖!
 
 dfs
-```cpp=
+```cpp
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -32,6 +32,21 @@ int main () {
 	dfs(0,graph,eee);
 }
 ```
+# 在void dfs那行，為何要在二維向量那邊加入&呢?
+先來講講有沒有加入的區別好了(某種程度上來說，我覺得這跟區域變數還有全域變數的概念挺像的)
+沒有加&我們稱其為<string>Call by Value</string>
+會建立一個複製品，在裡面做修改並不會影響到其他地方，他只在他那層那個區塊才會修改。我們一開始在學自製函式時基本上都是用此方式去製作。
+有加&我們稱為<string>Call by Reference</string>
+他則是引用原本的變數，你在自製函式中修改他，亦會連帶著修改到原本變數的數值。
+# 在這裡我們為何要用Call by Reference呢?
+因為這是一個遞迴的結構，我們需要讓裡面的每一層得到的消息皆相同，不然當一條路下到底部開始慢慢回朔往上時，便有可能再走一次已經去過的節點。
+就是說每個層級戶不知道其他層級去了哪些層級，這樣明顯是不行的。
+而使用call by reference就沒這問題了，因為eee用的都是最一開始的，有改變時每個層級都會收到訊息
+
+# 程式碼下方的圖長這樣
+![未命名繪圖 (2) (1)](https://github.com/user-attachments/assets/6e8c59a8-2d7e-4de6-bd99-430dd908509c)
+
+
 
 bfs
 ```cpp
